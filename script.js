@@ -367,12 +367,24 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
 
 // Logout
 async function logoutUser() {
-    await api("/api/auth/logout", { method: "POST" });
-    currentUser = null;
-    fetchMe(); // refresh UI state
-    alert("Logged Out ✅");
-    showProfile(); // return to profile page showing login form
+    const res = await api("/api/auth/logout", { method: "POST" });
+
+    if (res.ok) {
+        currentUser = null;
+
+        // Reset UI to Login state
+        document.getElementById("loginForm").style.display = "block";
+        document.getElementById("signupForm").style.display = "none";
+        document.getElementById("extraProfileButtons").style.display = "none";
+        document.getElementById("profileWelcome").textContent = "";
+
+        alert("Logged Out ✅");
+
+        showProfile(); // show the profile page with login
+    }
 }
+
+
 
 
 
