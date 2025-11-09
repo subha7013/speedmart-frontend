@@ -162,8 +162,6 @@ main {
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background: #fff;
-    justify-content: left;
-    
 }
 
 .product-card img {
@@ -487,5 +485,6 @@ footer {
     font-weight: bolder;
     transform: scale(1.05);
 }
+
 
 
