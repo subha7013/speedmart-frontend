@@ -190,20 +190,43 @@ function clearWishlist() { wishlist = []; showWishlist(); }
 // ✅ Orders
 async function showMyOrders() {
     await fetchMe();
-    if (!currentUser) return alert("Login first to order");
+    if (!currentUser) return alert("Please Login First");
 
     const res = await api("/api/orders");
     showSection("ordersPage");
-    const box = document.getElementById("ordersList");
-    box.innerHTML = "";
+    const list = document.getElementById("ordersList");
+    list.innerHTML = "";
 
-    if (res.orders.length === 0) return box.innerHTML = "<p>No orders yet</p>";
+    if (!res.orders || res.orders.length === 0) {
+        list.innerHTML = `<p style="text-align:center;">No orders yet.</p>`;
+        return;
+    }
 
-    res.orders.forEach(o => {
-        box.innerHTML += `<div class="product-card">
-            <p><b>Order ID:</b> ${o._id}</p>
-            <p><b>Total:</b> Rs ${o.total}</p>
-            <p><b>Status:</b> ${o.status}</p></div>`;
+    res.orders.forEach(order => {
+        const formattedDate = new Date(order.createdAt).toLocaleString();
+
+        list.innerHTML += `
+        <div class="order-card">
+            <div class="order-header">
+                <span class="order-id">Order #${order._id.slice(-6)}</span>
+                <span class="order-status ${order.status.toLowerCase()}">${order.status}</span>
+            </div>
+
+            <div class="order-items">
+                ${order.items.map(i => `
+                    <div class="order-item">
+                        <span>${i.name}</span>
+                        <span>× ${i.qty}</span>
+                        <span>₹${i.qty * i.price}</span>
+                    </div>
+                `).join("")}
+            </div>
+
+            <div class="order-footer">
+                <span><b>Total:</b> ₹${order.total}</span>
+                <span><b>Date:</b> ${formattedDate}</span>
+            </div>
+        </div>`;
     });
 }
 
@@ -220,5 +243,6 @@ signupForm.onsubmit = async (e) => {
     if (res.ok) fetchMe(), alert("Account Created ✅"); else alert("Email already exists ❌");
 };
 async function logoutUser() { await api("/api/auth/logout", { method: "POST" }); currentUser = null; updateProfileUI(); alert("Logged Out ✅"); showProfile(); }
+
 
 
