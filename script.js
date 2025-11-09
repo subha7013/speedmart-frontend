@@ -108,6 +108,10 @@ function showCategories() {
         box.appendChild(btn);
     });
 }
+function backToCategories() {
+    showCategories(); // simply shows category list again
+}
+
 
 // ✅ Products Display
 function showProducts(category) {
@@ -216,3 +220,4 @@ signupForm.onsubmit = async (e) => {
     if (res.ok) fetchMe(), alert("Account Created ✅"); else alert("Email already exists ❌");
 };
 async function logoutUser() { await api("/api/auth/logout", { method: "POST" }); currentUser = null; updateProfileUI(); alert("Logged Out ✅"); showProfile(); }
+
