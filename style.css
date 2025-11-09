@@ -485,6 +485,67 @@ footer {
     font-weight: bolder;
     transform: scale(1.05);
 }
+.order-card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: fadeIn 0.3s ease;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.order-id {
+    color: #444;
+}
+
+.order-status {
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.order-status.placed { background: #eaefff; color: #3652ff; }
+.order-status.processing { background: #fff4cc; color: #c58d00; }
+.order-status.delivered { background: #e2ffe2; color: #0b8a16; }
+.order-status.cancelled { background: #ffe5e5; color: #cc1414; }
+
+.order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
 
 
 
