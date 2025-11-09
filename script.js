@@ -26,21 +26,21 @@ async function fetchMe() {
     if (res.ok && res.email) {
         currentUser = { email: res.email };
 
-        // Show logged-in UI
         document.getElementById("loginForm").style.display = "none";
         document.getElementById("signupForm").style.display = "none";
         document.getElementById("extraProfileButtons").style.display = "block";
         document.getElementById("profileWelcome").textContent = "Welcome, " + res.email;
+
     } else {
         currentUser = null;
 
-        // Show login UI if logged out
         document.getElementById("loginForm").style.display = "block";
         document.getElementById("signupForm").style.display = "none";
         document.getElementById("extraProfileButtons").style.display = "none";
         document.getElementById("profileWelcome").textContent = "";
     }
 }
+
 
 
 
@@ -383,6 +383,7 @@ async function logoutUser() {
         showProfile(); // show the profile page with login
     }
 }
+
 
 
 
