@@ -62,8 +62,15 @@ main {
     align-items: center;
     position: relative;
 }
+.banner-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
 
-.home img {
+/*.home img {
     max-width: 100%;
     height: auto;
     display: block;
@@ -72,7 +79,7 @@ main {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     /* optional shadow */
-}
+}*/
 
 .home {
     position: relative;
@@ -544,6 +551,7 @@ footer {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
 
 
 
