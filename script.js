@@ -5,14 +5,17 @@ window.onload = async () => {
 };
 
 // ==================== API HELPER ====================
+const BASE_URL = "https://speedmart-backend.onrender.com";
+
 async function api(path, options = {}) {
-    const res = await fetch("https://speedmart-backend.onrender.com" + path, {
+    const res = await fetch(BASE_URL + path, {
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        credentials: "include", // allow cookies (login session)
         ...options
     });
     return res.json();
 }
+
 
 
 let currentUser = null;
@@ -358,3 +361,4 @@ async function logoutUser() {
         showLogin();
     }
 }
+
