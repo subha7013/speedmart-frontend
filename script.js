@@ -190,7 +190,7 @@ function clearWishlist() { wishlist = []; showWishlist(); }
 // ✅ Orders
 async function showMyOrders() {
     await fetchMe();
-    if (!currentUser) return alert("Login first!");
+    if (!currentUser) return alert("Login first to order");
 
     const res = await api("/api/orders");
     showSection("ordersPage");
@@ -220,4 +220,5 @@ signupForm.onsubmit = async (e) => {
     if (res.ok) fetchMe(), alert("Account Created ✅"); else alert("Email already exists ❌");
 };
 async function logoutUser() { await api("/api/auth/logout", { method: "POST" }); currentUser = null; updateProfileUI(); alert("Logged Out ✅"); showProfile(); }
+
 
