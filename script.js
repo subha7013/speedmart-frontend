@@ -22,12 +22,26 @@ let currentUser = null;
 
 async function fetchMe() {
     const res = await api("/api/me");
+
     if (res.ok && res.email) {
         currentUser = { email: res.email };
+
+        // Show logged-in UI
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("signupForm").style.display = "none";
+        document.getElementById("extraProfileButtons").style.display = "block";
+        document.getElementById("profileWelcome").textContent = "Welcome, " + res.email;
     } else {
         currentUser = null;
+
+        // Show login UI if logged out
+        document.getElementById("loginForm").style.display = "block";
+        document.getElementById("signupForm").style.display = "none";
+        document.getElementById("extraProfileButtons").style.display = "none";
+        document.getElementById("profileWelcome").textContent = "";
     }
 }
+
 
 
 
@@ -319,11 +333,11 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             password: loginPass.value
         })
     });
-    if (res.ok) {
-        await fetchMe();
-        updateProfileUI();
-        alert("Logged In Successfully ✅");
-    } else {
+   if (res.ok) {
+    alert("✅ Logged In Successfully");
+    fetchMe();
+    showProfile();
+} else {
         alert("❌ Wrong Email or Password");
     }
 });
@@ -355,10 +369,10 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
 async function logoutUser() {
     await api("/api/auth/logout", { method: "POST" });
     currentUser = null;
-    updateProfileUI();
+    fetchMe(); // refresh UI state
     alert("Logged Out ✅");
-    if(currentUser == null){
-        showLogin();
-    }
+    showProfile(); // return to profile page showing login form
 }
+
+
 
