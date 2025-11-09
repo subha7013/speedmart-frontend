@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeedMart: Get your products delivered in minutes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> 
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="/svgs/logo.svg" alt="SpeedMart Logo">
+            </div>
+            <div class="options">
+                <ul>
+                    <li onclick="showHome()"><img src="/svgs/home.svg" alt="" onclick="showHome()">Home</li>
+                    <li onclick="showCategories()"><img src="/svgs/category.svg" alt="">Categories</li>
+                    <li onclick="showWishlist()"><img src="/svgs/wish.svg" alt=""> Wishlist</li>
+                    <li onclick="showCart()"><img src="/svgs/cart.svg" alt=""> Cart</li>
+                    <li onclick="showProfile()"><img src="/svgs/profile.svg" alt=""> Profile</li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+            <!--Home-->
+            <section class="home" id="home">
+                <img src="/banner.jpg" alt="">
+                <button class="sn" onclick="showCategories()">Shop Now</button>
+            </section>
+            <section class="home2" id="home2">
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Lightning Fast</h3>
+                        <p>Delivery in 15-30 minutes</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Secure Payment</h3>
+                        <p>100% safe & secure transactions</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💯</div>
+                        <h3>Quality Assured</h3>
+                        <p>Premium quality products only</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><img src="/assets/return.png" height="50" width="50" alt=""></div>
+                        <h3>Easy Doorstep Return</h3>
+                        <p>Check products and accept or return</p>
+                    </div>
+                </div>
+            </section>
+                
+
+            <!-- Categories page-->
+            <div class="category">
+                <section id="categoriesPage" style="display:none;">
+                    <h2>Categories</h2>
+                    <div id="categoriesList"></div>
+                </section>
+            </div>
+            <!-- Products page-->
+            <section id="productsPage" style="display:none;">
+                <button class="back" onclick="backToCategories()">← Back</button>
+                <h2 id="categoryTitle"></h2>
+                <div id="productsList"></div>
+            </section>
+
+            <!-- Wishlist Page -->
+            <section id="wishlistPage" style="display:none;">
+                <h2>Your Wishlist</h2>
+                <div id="wishlistList"></div>
+                <button id="clearWishlistBtn" onclick="clearWishlist()">Clear Wishlist</button>
+            </section>
+            
+            <!-- Cart Page -->
+            <section id="cartPage" style="display:none;">
+                <h2>Your Cart</h2>
+                <div id="cartList"></div>
+                <h3 id="cartTotal">Total: Rs 0</h3>
+                <button onclick="placeOrder()">Checkout</button>
+            </section>
+            <!-- Profile Page -->
+            <section id="profilePage" style="display:none; text-align:center; padding-top:20px;">
+
+                <h3 id="profileWelcome"></h3>
+            
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-card" >
+                    <h2>Login</h2>
+                    <input id="loginEmail" type="email" placeholder="Email" required>
+                    <input id="loginPass" type="password" placeholder="Password" required>
+                    <button type="submit" class="submit-btn">Login</button>
+                    <p class="switch-text">Don't have an account? <span onclick="showSignup()">Sign Up</span></p>
+                </form>
+            
+                <!-- Signup Form -->
+                <form id="signupForm" class="auth-card" style="display:none;">
+                    <h2>Sign Up</h2>
+                    <input id="signupEmail" type="email" placeholder="Email" required>
+                    <input id="signupPh" type="number" placeholder="Phone Number" required>
+                    <input id="signupPass" type="password" placeholder="Password" required>
+                    <input id="signupRePass" type="password" placeholder="Confirm Password" required>
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                    <p class="switch-text">Already have an account? <span onclick="showLogin()" style="color: rgb(36, 252, 79);">Login</span></p>
+                </form>
+            
+                <!-- Visible only if logged in -->
+                <div id="extraProfileButtons" style="display:none; margin-top:20px;">
+                    <button onclick="showMyOrders()">My Orders</button>
+                    <button onclick="logoutUser()">Logout</button>
+                </div>
+            
+            </section>
+                        
+            <!-- Orders Page -->
+            <section id="ordersPage" style="display:none;">
+                <h2>My Orders</h2>
+                <div id="ordersList"></div>
+              </section>
+              
+              
+    </main>
+  
+    <footer id="footer">
+        <b>©Subhasish — SpeedMart || Made with ❤️ || 2025</b>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
