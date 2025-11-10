@@ -123,42 +123,124 @@ function showProducts(category) {
     category.products.forEach(p => {
         box.innerHTML += `
         <div class="product-card">
-            <img src="${p.image}" width="120">
-            <p>${p.name}</p>
-            <p>Rs ${p.price}</p>
-            <div>
-                <button onclick="decreaseCart('${p.id}')">-</button>
-                <span id="qty-${p.id}">0</span>
-                <button onclick="increaseCart('${p.id}','${p.name}',${p.price})">+</button>
+            <div class="img-box">
+                <img src="${p.image}">
             </div>
-            <button onclick="addToWishlist('${p.id}','${p.name}',${p.price},'${p.image}')">❤ Wishlist</button>
+            <div class="info">
+                <h3>${p.name}</h3>
+                <p>₹${p.price}</p>
+
+                <div class="qty-box">
+                    <button onclick="decreaseCart('${p.id}')">-</button>
+                    <span id="qty-${p.id}">0</span>
+                    <button onclick="increaseCart('${p.id}','${p.name}',${p.price})">+</button>
+                </div>
+
+                <div class="action-btns">
+                    <button class="wishlist-btn" onclick="addToWishlist('${p.id}','${p.name}',${p.price},'${p.image}')">Add to Wishlist
+                    </button>
+
+                    <button class="buy-btn" onclick="buyNow('${p.id}','${p.name}',${p.price})">Buy Now
+                    </button>
+                </div>
+            </div>
         </div>`;
     });
 }
+async function buyNow(id, name, price) {
+    await fetchMe();
+    if (!currentUser) return alert("Please Login First to Buy ✅");
+
+    const items = [{ name, price, qty: 1 }];
+    const total = price;
+
+    const res = await api("/api/checkout", {
+        method: "POST",
+        body: JSON.stringify({ items, total })
+    });
+
+    if (res.ok) {
+        alert("Order Placed Instantly ⚡✅");
+        showMyOrders();
+    } else {
+        alert("Something went wrong ❌");
+    }
+}
+
 
 // ✅ Cart
 function increaseCart(id, name, price) {
     let item = cart.find(i => i.id === id);
-    if (!item) cart.push(item = { id, name, price, qty: 1 });
-    else item.qty++;
-    document.getElementById(`qty-${id}`).textContent = item.qty;
+
+    if (!item) {
+        cart.push(item = { id, name, price, qty: 1 });
+    } else {
+        item.qty++;
+    }
+
+    // Update quantity in product list UI (if visible)
+    const qtySpan = document.getElementById(`qty-${id}`);
+    if (qtySpan) qtySpan.textContent = item.qty;
+
+    // ✅ If cart page is open, re-render cart
+    if (document.getElementById("cartPage").style.display !== "none") {
+        showCart();
+    }
+    showToast(`${name} added to Cart ✅`);
 }
+
+function showToast(msg) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerText = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+}
+
 function decreaseCart(id) {
     let item = cart.find(i => i.id === id);
-    if (item && item.qty > 0) item.qty--, document.getElementById(`qty-${id}`).textContent = item.qty;
+
+    if (!item) return;
+
+    item.qty--;
+
+    // If qty hits zero, remove item completely
+    if (item.qty <= 0) {
+        cart = cart.filter(i => i.id !== id);
+        showToast(`Cart is empty`);
+    }
+
+    showCart(); // Re-render cart after update
 }
+
 function showCart() {
     showSection("cartPage");
     const box = document.getElementById("cartList");
     box.innerHTML = "";
     let total = 0;
     cart = cart.filter(i => i.qty > 0);
+
     cart.forEach(i => {
-        total += i.price * i.qty;
-        box.innerHTML += `<div class="product-card"><p>${i.name}</p><p>Qty: ${i.qty}</p><p>Rs ${i.qty * i.price}</p></div>`;
+        total += i.qty * i.price;
+
+        box.innerHTML += `
+        <div class="cart-item">
+            <div class="left">
+                <h4>${i.name}</h4>
+                <p>Qty: ${i.qty}</p>
+                <p>₹${i.qty * i.price}</p>
+            </div>
+
+            <div class="right">
+                <button onclick="decreaseCart('${i.id}')">-</button>
+                <button onclick="increaseCart('${i.id}','${i.name}',${i.price})">+</button>
+            </div>
+        </div>`;
     });
+
     document.getElementById("cartTotal").textContent = "Total: Rs " + total;
 }
+
 function clearCart() { cart = []; showCart(); }
 
 // ✅ Checkout
@@ -175,7 +257,7 @@ async function placeOrder() {
 // ✅ Wishlist
 function addToWishlist(id, name, price, image) {
     if (!wishlist.find(i => i.id === id)) wishlist.push({ id, name, price, image });
-    alert(name + " added ❤️");
+    showToast(`${name} added to wishlist ❤️`);
 }
 function showWishlist() {
     showSection("wishlistPage");
@@ -243,6 +325,5 @@ signupForm.onsubmit = async (e) => {
     if (res.ok) fetchMe(), alert("Account Created ✅"); else alert("Email already exists ❌");
 };
 async function logoutUser() { await api("/api/auth/logout", { method: "POST" }); currentUser = null; updateProfileUI(); alert("Logged Out ✅"); showProfile(); }
-
 
 
