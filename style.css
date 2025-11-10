@@ -723,85 +723,116 @@ footer {
 }
 
 .order-card {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid #eee;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0px 3px 12px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    animation: fadeIn 0.3s ease;
+    gap: 14px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.order-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
+}
+
+/* Header: Order ID + Status */
 .order-header {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
-    font-weight: bold;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .order-id {
-    color: #444;
+    color: #222;
+    font-weight: bold;
 }
 
+/* Status Badge */
 .order-status {
-    padding: 4px 10px;
-    border-radius: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
     font-size: 12px;
-    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.4px;
 }
 
 .order-status.placed {
-    background: #eaefff;
-    color: #3652ff;
+    background: #e8eeff;
+    color: #2e51ff;
 }
 
 .order-status.processing {
-    background: #fff4cc;
-    color: #c58d00;
+    background: #fff1c7;
+    color: #b88300;
 }
 
 .order-status.delivered {
-    background: #e2ffe2;
-    color: #0b8a16;
+    background: #d4ffd9;
+    color: #058a1a;
 }
 
 .order-status.cancelled {
-    background: #ffe5e5;
-    color: #cc1414;
+    background: #ffd4d4;
+    color: #d32f2f;
 }
 
+/* Order Items Section */
 .order-items {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
+    border: 1px solid #efefef;
+    border-radius: 10px;
+    padding: 12px;
+    background: #fafafa;
 }
 
+/* Each item in the order */
 .order-item {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
+    font-weight: 500;
+    color: #333;
 }
 
+/* Footer: Total & Date */
 .order-footer {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
-    border-top: 1px solid #ddd;
     padding-top: 8px;
+    border-top: 1px solid #ececec;
+    font-weight: 600;
+    font-size: 14px;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
+/* Invoice Button */
+.order-card button {
+    background: #ff6d29;
+    padding: 10px 14px;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.25s;
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.order-card button:hover {
+    background: #ff4a00;
+    transform: scale(1.05);
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .action-btns {
