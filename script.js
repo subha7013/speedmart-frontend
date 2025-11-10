@@ -246,7 +246,11 @@ function clearCart() { cart = []; showCart(); }
 // ✅ Checkout
 async function placeOrder() {
     await fetchMe();
-    if (!currentUser) return alert("Login first!");
+    if (!currentUser) {
+        alert("Please Login first to continue");
+        showProfile(); // auto redirect to profile tab
+        return;
+    }    
     if (cart.length === 0) return alert("Cart empty!");
     const items = cart.map(i => ({ name: i.name, price: i.price, qty: i.qty }));
     const total = items.reduce((s, i) => s + i.price * i.qty, 0);
@@ -325,5 +329,27 @@ signupForm.onsubmit = async (e) => {
     if (res.ok) fetchMe(), alert("Account Created ✅"); else alert("Email already exists ❌");
 };
 async function logoutUser() { await api("/api/auth/logout", { method: "POST" }); currentUser = null; updateProfileUI(); alert("Logged Out ✅"); showProfile(); }
+let index = 0;
+
+function showSlides() {
+  const slides = document.querySelector(".slides");
+  const dots = document.querySelectorAll(".slider-dots span");
+
+  slides.style.transform = `translateX(-${index * 100}%)`;
+
+  dots.forEach(dot => dot.classList.remove("active"));
+  dots[index].classList.add("active");
+
+  index = (index + 1) % dots.length;
+}
+
+setInterval(showSlides, 3000);
+showSlides();
+
+function currentSlide(n) {
+  index = n;
+  showSlides();
+}
+
 
 
