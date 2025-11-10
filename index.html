@@ -29,13 +29,19 @@
             <!--Home-->
             <section class="home" id="home">
 
-                <div class="slider">
+                <div class="banner-slider">
                     <div class="slides">
-                        <img src="banner1.png" alt="">
-                        <img src="banner2.png" alt="">
-                        <img src="banner3.png" alt="">
+                      <img src="banner1.jpg" class="slide">
+                      <img src="banner2.jpg" class="slide">
+                      <img src="banner3.jpg" class="slide">
                     </div>
-                </div>
+                  
+                    <div class="slider-dots">
+                      <span onclick="currentSlide(0)"></span>
+                      <span onclick="currentSlide(1)"></span>
+                      <span onclick="currentSlide(2)"></span>
+                    </div>
+                  </div>
                 
                 <button class="sn" onclick="showCategories()">Shop Now</button>
                 </section>
@@ -142,6 +148,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
