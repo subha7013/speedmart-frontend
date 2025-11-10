@@ -255,7 +255,7 @@ async function placeOrder() {
     const items = cart.map(i => ({ name: i.name, price: i.price, qty: i.qty }));
     const total = items.reduce((s, i) => s + i.price * i.qty, 0);
     const res = await api("/api/checkout", { method: "POST", body: JSON.stringify({ items, total }) });
-    if (res.ok) alert("Order Placed ✅"), clearCart();
+    if (res.ok) showToast(`Order Placed 📦✅`), clearCart();
 }
 
 // ✅ Wishlist
@@ -350,6 +350,7 @@ function currentSlide(n) {
   index = n;
   showSlides();
 }
+
 
 
 
