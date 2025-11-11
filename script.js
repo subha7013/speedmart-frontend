@@ -1,5 +1,5 @@
-// const BASE_URL = "https://speedmart-backend.onrender.com";
-const BASE_URL = "https://astonishing-vibrancy-production.up.railway.app";
+const BASE_URL = "https://speedmart-backend.onrender.com";
+// const BASE_URL = "https://astonishing-vibrancy-production.up.railway.app";
 
 
 let currentUser = null;
@@ -352,6 +352,7 @@ function currentSlide(n) {
   index = n;
   showSlides();
 }
+
 
 
 
