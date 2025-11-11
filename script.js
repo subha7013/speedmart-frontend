@@ -1,4 +1,6 @@
-const BASE_URL = "https://speedmart-backend.onrender.com";
+// const BASE_URL = "https://speedmart-backend.onrender.com";
+const BASE_URL = "https://astonishing-vibrancy-production.up.railway.app";
+
 
 let currentUser = null;
 let cart = [];
@@ -350,6 +352,7 @@ function currentSlide(n) {
   index = n;
   showSlides();
 }
+
 
 
 
