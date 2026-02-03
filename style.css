@@ -10,7 +10,7 @@ body {
 }
 
 nav {
-    background-color: rgb(236, 79, 44);
+    background-color: #000001;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -193,7 +193,7 @@ main {
     padding: 20px 30px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: rgb(236, 79, 44);
+    background-color: #485cbb;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -219,7 +219,7 @@ main {
 
 .sn:hover {
     background-color: white;
-    color: orangered;
+    color: #485cbb;
     transform: translateX(-50%) scale(1.2);
 }
 
@@ -248,7 +248,7 @@ main {
 
 .product-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(255, 94, 0, 0.7);
+    box-shadow: 0 0 30px #032460;
 }
 
 /* Mobile: 2 cards per row */
@@ -278,7 +278,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #ff8a00, #ff3d00);
+    linear-gradient(135deg, #7e6240, #485cbb);
 }
 
 .product-card img {
@@ -350,7 +350,7 @@ main {
 }
 
 #wishlistPage button {
-    background-color: orangered;
+    background-color: #194490;
     border: none;
     color: white;
     font-weight: bolder;
@@ -360,7 +360,7 @@ main {
 }
 
 #wishlistPage button:hover {
-    background-color: rgb(1, 85, 1);
+    background-color: #37404a;
 }
 
 /* Wishlist */
@@ -436,7 +436,7 @@ main {
     padding: 12px 20px;
     border: none;
     border-radius: 8px;
-    background: #f44336;
+    background: #194490;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -446,7 +446,7 @@ main {
 }
 
 #categoriesList button:hover {
-    background: #d32f2f;
+    background: #032460;
     transform: scale(1.05);
 }
 
@@ -457,7 +457,7 @@ main {
 
 #productsPage button {
     padding: 10px 10px;
-    background-color: orangered;
+    background-color: #736864;
     color: white;
     border: none;
     border-radius: 8px;
@@ -475,7 +475,7 @@ main {
     border: none;
     border-radius: 8px;
     color: white;
-    background-color: orangered;
+    background-color: #194490;
     font-size: 12px;
     font-weight: bolder;
     margin-top: 15px;
@@ -483,7 +483,7 @@ main {
 }
 
 #cartPage button:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 
@@ -595,7 +595,7 @@ footer {
         width: 100%;
         display: flex;
         justify-content: center;
-        background: #fff;
+        background: #000001;
         position: fixed;
         top: 0;
         left: 0;
@@ -768,14 +768,14 @@ footer {
     padding: 15px 20px;
     border-radius: 8px;
     border: none;
-    background: rgb(236, 79, 44);
+    background: #117885;
     color: white;
     cursor: pointer;
     font-weight: bolder;
 }
 
 #extraProfileButtons button:hover {
-    background: #44e74f;
+    background: rgb(12 51 56);
     color: white;
     font-weight: bolder;
     transform: scale(1.05);
@@ -917,6 +917,7 @@ footer {
 .buy-btn:hover {
     background: #ffb733;
 }
+
 
 
 
