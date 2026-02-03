@@ -291,7 +291,7 @@ main {
 
 /* Text */
 .product-card .info {
-    padding: 12px;
+    padding: 0;
     text-align: center;
 }
 
@@ -916,6 +916,7 @@ footer {
 .buy-btn:hover {
     background: #ffb733;
 }
+
 
 
 
