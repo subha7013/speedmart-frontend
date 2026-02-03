@@ -129,7 +129,9 @@ main {
   /* Mobile Height Fix */
   @media (max-width: 768px) {
     .banner-slider {
-      height: 481px;
+     width: 100%;
+        height: auto;
+        object-fit: contain; 
     }
     .slides img {
       height: 190px;
@@ -926,6 +928,7 @@ footer {
 .buy-btn:hover {
     background: #ffb733;
 }
+
 
 
 
