@@ -17,13 +17,14 @@
       SPEED<tspan fill="url(#brand-grad)">MART</tspan>
     </text>
     
-    <text x="112" y="105" font-size="10" font-weight="600" fill="#fffff" letter-spacing="1">
+    <text x="112" y="105" font-size="10" font-weight="600" fill="white" letter-spacing="1">
       GADGETS AT LIGHTNING SPEED
     </text>
   </g>
   
   <rect x="112" y="115" width="240" height="2" fill="url(#brand-grad)" rx="1" />
 </svg>
+
 
 
 
