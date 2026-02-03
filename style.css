@@ -110,6 +110,18 @@ main {
       object-fit: cover;
       border-radius: 12px;
     }
+    .options li span {
+    display: none;   /* Hide text */
+  }
+
+  .options li {
+    justify-content: center;
+  }
+
+  .options li img {
+    width: 24px;
+    height: 24px;
+  }
   }
   
   /* Dots */
@@ -910,4 +922,5 @@ footer {
 .buy-btn:hover {
     background: #ffb733;
 }
+
 
