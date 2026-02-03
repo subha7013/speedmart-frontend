@@ -40,10 +40,16 @@ nav ul li:hover {
     color: yellow;
 }
 
-.options ul li img {
+/* .options ul li img {
     width: 20px;
     height: 20px;
     vertical-align: middle;
+} */
+.options li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
 main {
@@ -904,3 +910,4 @@ footer {
 .buy-btn:hover {
     background: #ffb733;
 }
+
