@@ -40,11 +40,32 @@ nav ul li:hover {
     color: yellow;
 }
 
-/* .options ul li img {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-} */
+.options ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.options ul li {
+    display: flex;                 /* KEY FIX */
+    align-items: center;           /* vertical centering */
+    gap: 12px;                     /* space between icon & text */
+    padding: 12px 16px;
+    cursor: pointer;
+    color: white;
+}
+
+.options ul li img {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;                /* prevents icon distortion */
+}
+
+.options ul li span {
+    font-size: 16px;
+    white-space: nowrap;
+}
+
 .options li {
   display: flex;
   align-items: center;
@@ -74,7 +95,7 @@ main {
 
 .banner-slider {
     width: 100%;
-    max-width: 1200px;
+    max-width: 800px;
     margin: auto;
     position: relative;
     overflow: hidden;
@@ -99,11 +120,12 @@ main {
   .slides img {
     height: 360px;
   }
-  
+
+
   /* Mobile Height Fix */
   @media (max-width: 768px) {
     .banner-slider {
-      height: 190px;
+      height: 481px;
     }
     .slides img {
       height: 190px;
@@ -117,6 +139,14 @@ main {
   .options li {
     justify-content: center;
   }
+      .options ul li {
+        justify-content: center;   /* center icon */
+        padding: 14px 0;
+    }
+
+    .options ul li span {
+        display: none;             /* hide text */
+    }
   }
   
   /* Dots */
@@ -178,8 +208,8 @@ main {
 }
 
 .home img {
-    max-width: 60%;
-    height: auto;
+    max-width: 100%;
+    height: 48vh;
     display: block;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -187,10 +217,10 @@ main {
 
 .sn {
     position: absolute;
-    bottom: 15%;
+    bottom: 63%;
     left: 50%;
     transform: translateX(-50%);
-    padding: 20px 30px;
+    padding: 16px 23px;
     font-size: 1rem;
     font-weight: bold;
     background-color: #485cbb;
@@ -916,6 +946,7 @@ footer {
 .buy-btn:hover {
     background: #ffb733;
 }
+
 
 
 
