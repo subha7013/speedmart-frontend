@@ -719,7 +719,7 @@ footer {
     width: 100%;
     padding: 10px;
     margin-top: 8px;
-    background: orangered;
+    background: #1436f6;
     border: none;
     color: white;
     font-weight: bold;
@@ -928,6 +928,7 @@ footer {
 .buy-btn:hover {
     background: #ffb733;
 }
+
 
 
 
