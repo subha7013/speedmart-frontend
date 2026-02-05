@@ -162,7 +162,7 @@ async function buyNow(id, name, price) {
     });
 
     if (res.ok) {
-        alert("Order Placed Instantly ⚡✅");
+        showToast(`Order Placed Instantly ⚡✅`);
         showMyOrders();
     } else {
         alert("Something went wrong ❌");
@@ -352,6 +352,7 @@ function currentSlide(n) {
   index = n;
   showSlides();
 }
+
 
 
 
