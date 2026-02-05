@@ -151,7 +151,7 @@ function showProducts(category) {
 }
 async function buyNow(id, name, price) {
     await fetchMe();
-    if (!currentUser) return alert("Please Login First to Buy ✅");
+    if (!currentUser) return showToast(`Please Login First to Buy ✅`);
 
     const items = [{ name, price, qty: 1 }];
     const total = price;
@@ -165,7 +165,7 @@ async function buyNow(id, name, price) {
         showToast(`Order Placed Instantly ⚡✅`);
         showMyOrders();
     } else {
-        alert("Something went wrong ❌");
+        showToast(`Something went wrong ❌`);
     }
 }
 
@@ -249,11 +249,11 @@ function clearCart() { cart = []; showCart(); }
 async function placeOrder() {
     await fetchMe();
     if (!currentUser) {
-        alert("Please Login first to continue");
+        showToast(`Please Login first to continue`);
         showProfile(); // auto redirect to profile tab
         return;
     }    
-    if (cart.length === 0) return alert("Cart empty!");
+    if (cart.length === 0) return showToast(`Cart is empty`);
     const items = cart.map(i => ({ name: i.name, price: i.price, qty: i.qty }));
     const total = items.reduce((s, i) => s + i.price * i.qty, 0);
     const res = await api("/api/checkout", { method: "POST", body: JSON.stringify({ items, total }) });
@@ -278,7 +278,7 @@ function clearWishlist() { wishlist = []; showWishlist(); }
 // ✅ Orders
 async function showMyOrders() {
     await fetchMe();
-    if (!currentUser) return alert("Please Login First");
+    if (!currentUser) return showToast(`Please Login First`);
 
     const res = await api("/api/orders");
     showSection("ordersPage");
@@ -322,36 +322,37 @@ async function showMyOrders() {
 loginForm.onsubmit = async (e) => {
     e.preventDefault();
     const res = await api("/api/login", { method: "POST", body: JSON.stringify({ email: loginEmail.value, password: loginPass.value }) });
-    if (res.ok) fetchMe(), alert("Logged In ✅"); else alert("Wrong credentials ❌");
+    if (res.ok) fetchMe(), showToast(`Logged In ✅`); else showToast(`Credentials are not matched`);
 };
 signupForm.onsubmit = async (e) => {
     e.preventDefault();
-    if (signupPass.value !== signupRePass.value) return alert("Passwords don't match ❌");
+    if (signupPass.value !== signupRePass.value) return showToast(`Passwords don't match ❌`);
     const res = await api("/api/register", { method: "POST", body: JSON.stringify({ email: signupEmail.value, phone: signupPh.value, password: signupPass.value }) });
-    if (res.ok) fetchMe(), alert("Account Created ✅"); else alert("Email already exists ❌");
+    if (res.ok) fetchMe(), showToast(`Account Created ✅`); else showToast(`Email already exists ❌`);
 };
-async function logoutUser() { await api("/api/auth/logout", { method: "POST" }); currentUser = null; updateProfileUI(); alert("Logged Out ✅"); showProfile(); }
+async function logoutUser() { await api("/api/auth/logout", { method: "POST" }); currentUser = null; updateProfileUI(); showToast(`Logged Out ✅`); showProfile(); }
 let index = 0;
+// This was for hero section animation in home section
+// function showSlides() {
+//   const slides = document.querySelector(".slides");
+//   const dots = document.querySelectorAll(".slider-dots span");
 
-function showSlides() {
-  const slides = document.querySelector(".slides");
-  const dots = document.querySelectorAll(".slider-dots span");
+//   slides.style.transform = `translateX(-${index * 100}%)`;
 
-  slides.style.transform = `translateX(-${index * 100}%)`;
+//   dots.forEach(dot => dot.classList.remove("active"));
+//   dots[index].classList.add("active");
 
-  dots.forEach(dot => dot.classList.remove("active"));
-  dots[index].classList.add("active");
+//   index = (index + 1) % dots.length;
+// }
 
-  index = (index + 1) % dots.length;
-}
+// setInterval(showSlides, 3000);
+// showSlides();
 
-setInterval(showSlides, 3000);
-showSlides();
+// function currentSlide(n) {
+//   index = n;
+//   showSlides();
+// }
 
-function currentSlide(n) {
-  index = n;
-  showSlides();
-}
 
 
 
