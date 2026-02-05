@@ -163,7 +163,6 @@ async function buyNow(id, name, price) {
 
     if (res.ok) {
         showToast(`Order Placed Instantly ⚡✅`);
-        showMyOrders();
     } else {
         showToast(`Something went wrong ❌`);
     }
@@ -332,31 +331,3 @@ signupForm.onsubmit = async (e) => {
 };
 async function logoutUser() { await api("/api/auth/logout", { method: "POST" }); currentUser = null; updateProfileUI(); showToast(`Logged Out ✅`); showProfile(); }
 let index = 0;
-// This was for hero section animation in home section
-// function showSlides() {
-//   const slides = document.querySelector(".slides");
-//   const dots = document.querySelectorAll(".slider-dots span");
-
-//   slides.style.transform = `translateX(-${index * 100}%)`;
-
-//   dots.forEach(dot => dot.classList.remove("active"));
-//   dots[index].classList.add("active");
-
-//   index = (index + 1) % dots.length;
-// }
-
-// setInterval(showSlides, 3000);
-// showSlides();
-
-// function currentSlide(n) {
-//   index = n;
-//   showSlides();
-// }
-
-
-
-
-
-
-
-
