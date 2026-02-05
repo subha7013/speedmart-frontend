@@ -538,8 +538,8 @@ main {
 
 .toast {
     position: fixed;
-    top: 70px;
-    left: 70%;
+    bottom: 60px;
+    left: 40%;
     transform: translateX(-50%);
     background: #020000;
     padding: 12px 18px;
@@ -928,6 +928,7 @@ footer {
 .buy-btn:hover {
     background: #ffb733;
 }
+
 
 
 
