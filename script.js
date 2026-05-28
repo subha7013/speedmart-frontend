@@ -2,6 +2,7 @@ const BASE_URL = "https://speedmart-backend.onrender.com";
 // const BASE_URL = "https://astonishing-vibrancy-production.up.railway.app";
 
 
+
 let currentUser = null;
 let cart = [];
 let wishlist = [];
@@ -53,7 +54,7 @@ async function api(path, options = {}) {
 // ✅ Fetch user session
 async function fetchMe() {
     const res = await api("/api/me");
-    currentUser = (res.ok && res.email) ? { email: res.email } : null;
+    currentUser = (res.ok && res.email) ? { email: res.email, phone: res.phone } : null;
     updateProfileUI();
 }
 
@@ -63,22 +64,147 @@ window.onload = () => {
 };
 
 // ✅ Update Profile Screen
-function updateProfileUI() {
+async function updateProfileUI() {
     const loginForm = document.getElementById("loginForm");
     const signupForm = document.getElementById("signupForm");
-    const profileBtns = document.getElementById("extraProfileButtons");
-    const welcome = document.getElementById("profileWelcome");
+    const profileDashboard = document.getElementById("profileDashboard");
 
     if (currentUser) {
-        loginForm.style.display = "none";
-        signupForm.style.display = "none";
-        profileBtns.style.display = "block";
-        welcome.textContent = `Welcome, ${currentUser.email}`;
+        if (loginForm) loginForm.style.display = "none";
+        if (signupForm) signupForm.style.display = "none";
+        if (profileDashboard) profileDashboard.style.display = "block";
+        
+        // Fill basic details
+        const emailDisp = document.getElementById("profileEmailDisplay");
+        if (emailDisp) emailDisp.textContent = currentUser.email;
+        
+        const phoneInput = document.getElementById("profilePhoneInput");
+        if (phoneInput) phoneInput.value = currentUser.phone || "";
+        
+        const avatarLetter = document.getElementById("avatarLetter");
+        if (avatarLetter) avatarLetter.textContent = currentUser.email.charAt(0).toUpperCase();
+
+        // Calculate and render stats counts
+        const wishlistCount = document.getElementById("profileWishlistCount");
+        if (wishlistCount) wishlistCount.textContent = wishlist.length;
+
+        const cartCount = document.getElementById("profileCartCount");
+        if (cartCount) cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+
+        const ordersCount = document.getElementById("profileOrdersCount");
+        const recentOrdersBox = document.getElementById("profileRecentOrders");
+
+        // Fetch orders count and preview from server
+        try {
+            const res = await api("/api/orders");
+            if (res.ok && res.orders) {
+                if (ordersCount) ordersCount.textContent = res.orders.length;
+                
+                if (recentOrdersBox) {
+                    recentOrdersBox.innerHTML = "";
+                    if (res.orders.length === 0) {
+                        recentOrdersBox.innerHTML = `<p class="no-orders">You haven't placed any orders yet.</p>`;
+                    } else {
+                        // Take the last 2 orders
+                        const recent = res.orders.slice(0, 2);
+                        recent.forEach(order => {
+                            const formattedDate = new Date(order.createdAt).toLocaleDateString(undefined, {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric'
+                            });
+                            
+                            const itemsPreview = order.items.map(item => `${item.name} (x${item.qty})`).join(", ");
+                            
+                            recentOrdersBox.innerHTML += `
+                            <div class="recent-order-item">
+                                <div class="ro-header">
+                                    <span class="ro-id">Order #${order._id.slice(-6).toUpperCase()}</span>
+                                    <span class="ro-status ${order.status.toLowerCase()}">${order.status}</span>
+                                </div>
+                                <div class="ro-details">
+                                    <p class="ro-items">${itemsPreview}</p>
+                                    <div class="ro-meta">
+                                        <span class="ro-total">₹${order.total}</span>
+                                        <span class="ro-date">${formattedDate}</span>
+                                    </div>
+                                </div>
+                            </div>`;
+                        });
+                    }
+                }
+            } else {
+                if (ordersCount) ordersCount.textContent = "0";
+                if (recentOrdersBox) recentOrdersBox.innerHTML = `<p class="no-orders">Failed to load orders.</p>`;
+            }
+        } catch (e) {
+            console.error("Error loading profile orders stats:", e);
+            if (ordersCount) ordersCount.textContent = "0";
+            if (recentOrdersBox) recentOrdersBox.innerHTML = `<p class="no-orders">Error loading orders.</p>`;
+        }
     } else {
-        loginForm.style.display = "block";
-        signupForm.style.display = "none";
-        profileBtns.style.display = "none";
-        welcome.textContent = "";
+        if (loginForm) loginForm.style.display = "block";
+        if (signupForm) signupForm.style.display = "none";
+        if (profileDashboard) profileDashboard.style.display = "none";
+    }
+}
+
+// ✅ Save Phone Details
+async function saveProfileChanges() {
+    const phoneInput = document.getElementById("profilePhoneInput");
+    if (!phoneInput) return;
+    const phoneVal = phoneInput.value.trim();
+
+    const res = await api("/api/user/update", {
+        method: "POST",
+        body: JSON.stringify({ phone: phoneVal })
+    });
+
+    if (res.ok) {
+        showToast("Profile Phone Updated ✅");
+        if (currentUser) currentUser.phone = phoneVal;
+    } else {
+        showToast(res.msg || "Failed to update profile ❌");
+    }
+}
+
+// ✅ Change Password
+async function changeUserPassword() {
+    const newPass = document.getElementById("newPasswordInput");
+    const confirmPass = document.getElementById("confirmNewPasswordInput");
+    if (!newPass || !confirmPass) return;
+
+    if (!newPass.value) {
+        return showToast("Password cannot be empty ❌");
+    }
+    if (newPass.value !== confirmPass.value) {
+        return showToast("Passwords do not match ❌");
+    }
+
+    const res = await api("/api/user/update", {
+        method: "POST",
+        body: JSON.stringify({ password: newPass.value })
+    });
+
+    if (res.ok) {
+        showToast("Password Changed Successfully ✅");
+        newPass.value = "";
+        confirmPass.value = "";
+        togglePasswordForm();
+    } else {
+        showToast(res.msg || "Failed to change password ❌");
+    }
+}
+
+// ✅ Toggle Change Password Form
+function togglePasswordForm() {
+    const section = document.getElementById("changePasswordSection");
+    if (!section) return;
+    if (section.style.display === "none") {
+        section.style.display = "block";
+        section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+        section.style.display = "none";
     }
 }
 
@@ -139,7 +265,7 @@ function showProducts(category) {
                 </div>
 
                 <div class="action-btns">
-                    <button class="wishlist-btn" onclick="addToWishlist('${p.id}','${p.name}',${p.price},'${p.image}')">Add to Wishlist
+                    <button class="wishlist-btn" onclick="addToWishlist('${p.id}','${p.name}',${p.price},'${p.image}')">❤️
                     </button>
 
                     <button class="buy-btn" onclick="buyNow('${p.id}','${p.name}',${p.price})">Buy Now
