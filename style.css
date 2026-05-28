@@ -467,9 +467,9 @@ main {
     padding-left: 20px;
 }
 
-#productsPage button {
+#productsPage button , #ordersPage button {
     padding: 10px 10px;
-    background-color: #736864;
+    background-color: #261e76;
     color: white;
     border: none;
     border-radius: 8px;
@@ -477,6 +477,7 @@ main {
     cursor: pointer;
     transform: scale(1.05);
 }
+
 
 #cartPage {
     margin-left: 20px;
@@ -927,6 +928,409 @@ footer {
 
 .buy-btn:hover {
     background: #ffb733;
+}
+
+/* ==========================================================================
+   PROFILE DASHBOARD STYLES
+   ========================================================================== */
+
+.profile-dashboard-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 15px;
+    animation: fadeIn 0.5s ease;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.dashboard-card {
+    background: #111;
+    border-radius: 16px;
+    padding: 25px;
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 1px rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-info-card {
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff4500, #ff9d00);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+    border: 3px solid #111;
+    position: relative;
+}
+
+.profile-avatar::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff4500, #ff9d00);
+    z-index: -1;
+    opacity: 0.8;
+}
+
+#profileEmailDisplay {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+    word-break: break-all;
+}
+
+
+
+.profile-details-form {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.profile-details-form input {
+    width: 100%;
+    padding: 10px 12px;
+    background: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.profile-details-form input:focus {
+    border-color: #ff9d00;
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 157, 0, 0.2);
+}
+
+.save-btn {
+    width: 100%;
+    padding: 10px;
+    background: #ff4500;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+    background: #ff6a00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+}
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    font-size: 13px;
+}
+
+.action-btn.outline {
+    background: transparent;
+    border: 1px solid #333;
+    color: #ccc;
+}
+
+.action-btn.outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border-color: #ff9d00;
+}
+
+.action-btn.danger {
+    background: #d32f2f;
+    color: white;
+}
+
+.action-btn.danger:hover {
+    background: #f44336;
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+.change-password-box {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #222;
+    text-align: left;
+    animation: fadeIn 0.3s ease;
+}
+
+.change-password-box h4 {
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #eee;
+}
+
+.change-password-box input {
+    width: 100%;
+    padding: 8px 12px;
+    background: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: white;
+    margin-bottom: 8px;
+    font-size: 13px;
+    transition: border 0.3s;
+}
+
+.change-password-box input:focus {
+    border-color: #ff9d00;
+    outline: none;
+}
+
+.password-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.cancel-btn {
+    flex: 1;
+    padding: 8px;
+    background: transparent;
+    border: 1px solid #333;
+    color: #ccc;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 12px;
+    text-align: center;
+}
+
+.cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+.dashboard-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.stat-card {
+    background: #111;
+    border-radius: 12px;
+    padding: 16px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(255, 157, 0, 0.15);
+    border-color: rgba(255, 157, 0, 0.2);
+}
+
+.stat-icon {
+    font-size: 24px;
+}
+
+.stat-info {
+    text-align: left;
+}
+
+.stat-info h4 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff9d00;
+    line-height: 1.1;
+}
+
+.stat-info p {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 2px;
+}
+
+.recent-orders-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.recent-orders-card h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.view-all-btn {
+    background: transparent;
+    border: none;
+    color: #ff9d00;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.view-all-btn:hover {
+    color: #ffb733;
+    text-decoration: underline;
+}
+
+.recent-orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.no-orders {
+    font-size: 13px;
+    color: #888;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.recent-order-item {
+    background: #161616;
+    border-radius: 10px;
+    padding: 14px;
+    border-left: 4px solid #ff4500;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.recent-order-item:hover {
+    background: #1c1c1c;
+}
+
+.ro-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.ro-id {
+    font-weight: bold;
+    font-size: 13px;
+    color: #eee;
+}
+
+.ro-status {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.ro-status.placed {
+    background: rgba(46, 81, 255, 0.15);
+    color: #8fa0ff;
+}
+
+.ro-status.processing {
+    background: rgba(184, 131, 0, 0.15);
+    color: #ffd875;
+}
+
+.ro-status.delivered {
+    background: rgba(5, 138, 26, 0.15);
+    color: #6bff83;
+}
+
+.ro-status.cancelled {
+    background: rgba(211, 47, 47, 0.15);
+    color: #ff8f8f;
+}
+
+.ro-items {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.ro-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    border-top: 1px solid #222;
+    padding-top: 8px;
+}
+
+.ro-total {
+    font-weight: bold;
+    color: #ff9d00;
+}
+
+.ro-date {
+    color: #777;
+}
+
+/* Responsive adjustments */
+@media (min-width: 769px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr 2fr;
+        gap: 20px;
+        align-items: start;
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
 }
 
 
