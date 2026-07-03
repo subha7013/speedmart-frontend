@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 // Allow frontend (your netlify site) to access backend
 app.use(cors({
-  origin: "https://speedmart-order.netlify.app", // your frontend domain
+  origin: "https://orderquickcart.netlify.app/", // your frontend domain
   //origin: "http://127.0.0.1:5500", // for local testing
   credentials: true
 }));
