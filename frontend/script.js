@@ -42,14 +42,12 @@ const categories = [
 ];
 
 // ✅ API Call Wrapper
-async function api(path, options = {}) {
-    const res = await fetch(BASE_URL + path, {
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        ...options
-    });
-    return res.json();
-}
+// const res = await fetch(BASE_URL + path, {
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    ...options
+});
+
 
 // ✅ Fetch user session
 async function fetchMe() {
