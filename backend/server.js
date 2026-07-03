@@ -16,10 +16,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Allow frontend (your netlify site) to access backend
-const allowedOrigins = [
-  "https://orderquickcart.netlify.app",
-  "https://speedmart-order.netlify.app"
-];
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(",");
+
 
 app.use(cors({
   origin: function (origin, callback) {
