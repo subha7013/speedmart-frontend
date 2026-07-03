@@ -42,11 +42,14 @@ const categories = [
 ];
 
 // ✅ API Call Wrapper
-const res = await fetch(BASE_URL + path, {
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-    ...options
-});
+async function api(path, options = {}) {
+    const res = await fetch(BASE_URL + path, {
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        ...options
+    });
+    return res.json();
+}
 
 
 // ✅ Fetch user session
