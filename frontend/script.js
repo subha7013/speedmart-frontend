@@ -42,7 +42,7 @@ const categories = [
 ];
 
 // ✅ API Call Wrapper
-// const res = await fetch(BASE_URL + path, {
+const res = await fetch(BASE_URL + path, {
     headers: { "Content-Type": "application/json" },
     credentials: "include",
     ...options
